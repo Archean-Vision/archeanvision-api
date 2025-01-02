@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: archeanvision-api
+Version: 1.0.1
+Summary: Python wrapper for Archean Vision API
+Home-page: https://github.com/Archean-Vision/archeanvision-api
+Author: Charles Hajjar
+Author-email: support@archeanvision.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.0.0
+
+# ArcheanVision API
+
+Python wrapper for the Archean Vision API.
+
+## Installation
+
+```bash
+pip install archeanvision-api
+```
+## Usage
+
+from archeanvision import ArcheanVisionAPI
+
+api = ArcheanVisionAPI("username", "password")
+active_markets = api.get_active_markets()
+print("Active Markets:", active_markets)
