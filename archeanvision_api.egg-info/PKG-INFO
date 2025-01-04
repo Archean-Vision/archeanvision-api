@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: archeanvision-api
-Version: 1.0.2
+Version: 1.0.3
 Summary: Python wrapper for the updated Archean Vision API (using Bearer Token)
 Home-page: https://github.com/Archean-Vision/archeanvision-api
 Author: Charles Hajjar
@@ -12,133 +12,153 @@ Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 Requires-Dist: requests>=2.0.0
 
-## ArcheanVision API
+# ArcheanVision API
 
-Un wrapper Python pour consommer l’API Archean Vision.
-Ce projet permet de récupérer des informations sur les marchés actifs, les signaux en temps réel/historiques, et bien plus encore — le tout via un Bearer Token.
-Sommaire
+A **Python wrapper** for the [Archean Vision](https://archeanvision.com/) API.  
+This project allows you to retrieve information on active/inactive markets, real-time or historical signals, and much more — all secured via a **Bearer Token**.
 
-    Fonctionnalités Principales
-    Installation
-    Configuration
-    Utilisation
-    Exemple de Code
-    Contribuer
-    Licence
+---
 
-## Fonctionnalités Principales
+## Table of Contents
 
-    Récupération de la liste des marchés actifs et inactifs.
-    Accès aux signaux historiques ou en temps réel (SSE).
-    Récupération de données de marché pour chaque actif (historique et temps réel).
-    Facilité d’intégration grâce à une interface orientée objet.
+1. [Key Features](#key-features)  
+2. [Installation](#installation)  
+   - [From PyPI](#from-pypi)  
+   - [Manual Installation](#manual-installation)  
+3. [Configuration](#configuration)  
+4. [Usage](#usage)  
+5. [Code Example](#code-example)  
+6. [Contributing](#contributing)  
+7. [License](#license)
+
+---
+
+## Key Features
+
+- **Fetch** active and inactive markets.  
+- **Access** historical or real-time signals (via SSE).  
+- **Retrieve** market data (historical and real-time).  
+- **Easy Integration** through an object-oriented interface.
+
+---
 
 ## Installation
-## Depuis PyPI
 
+### From PyPI
+
+```bash
 pip install archeanvision-api
 
-    Assurez-vous d’avoir Python 3.6 ou une version ultérieure.
+    Requirement: Python 3.6 or later.
 
-## Installation Manuelle
+Manual Installation
 
-    Clonez ce dépôt ou téléchargez-le :
+    Clone or download this repository:
 
 git clone https://github.com/Archean-Vision/archeanvision-api.git
 
-Placez-vous dans le dossier :
+Navigate into the folder:
 
 cd archeanvision-api
 
-## Installez les dépendances :
+Install dependencies:
 
 pip install -r requirements.txt
 
-## (Optionnel) Installez-le en mode développement :
+(Optional) Install in editable mode:
 
     pip install -e .
 
-## Configuration
-Obtenir une Clé API (Bearer Token)
+Configuration
+Obtain a Bearer Token
 
-    Rendez-vous sur votre profil Archean Vision.
-    Créez ou récupérez votre clé API (un token commençant souvent par ...).
-    Conservez-le précieusement (vous devrez l’utiliser comme Bearer Token).
+    Go to your ArcheanVision profile.
+    Create or retrieve your API key (a token typically starting with pypi-... or another alphanumeric string).
+    Keep this token in a safe place (you will need it as your Bearer Token).
 
-## Utilisation
+Usage
 
-Une fois la clé API obtenue, vous pouvez l’utiliser pour appeler les endpoints protégés de l’API Archean Vision :
+Once you have your API key, you can call the protected endpoints of the ArcheanVision API as follows:
 
 from archeanvision import ArcheanVisionAPI
 
-# Remplacez "YOUR_API_KEY" par votre token Bearer
+# Replace "YOUR_API_KEY" with your Bearer token
 api = ArcheanVisionAPI(api_key="YOUR_API_KEY")
 
-# Récupérer la liste des marchés actifs
+# Fetch the list of active markets
 active_markets = api.get_active_markets()
 print("Active Markets:", active_markets)
 
-# Récupérer les infos du marché BTC (si présent)
+# Retrieve market info for BTC (if present)
 if "BTC" in active_markets:
     market_info = api.get_market_info("BTC")
     print("Market Info for BTC:", market_info)
 
-## Exemple de Code
+Code Example
 
 """
-Exemple complet d'utilisation de la librairie ArcheanVision API.
-Sauvegardez ce fichier sous 'example.py' puis exécutez-le avec : 
+Full example of how to use the ArcheanVision API library.
+Save this file as 'example.py' and run it with:
     python example.py
 """
 
 from archeanvision import ArcheanVisionAPI
 
 def main():
-    # Initialiser l'API avec votre Bearer Token
-    api_key = "YOUR_API_KEY"  # Remplacez par votre clé
+    # Initialize the API with your Bearer Token
+    api_key = "YOUR_API_KEY"  # Replace with your actual key
     api = ArcheanVisionAPI(api_key)
 
-    # 1. Marchés actifs
+    # 1. Fetch active markets
     active = api.get_active_markets()
     print("Active Markets:", active)
 
-    # 2. Marchés inactifs
+    # 2. Fetch inactive markets
     inactive = api.get_inactive_markets()
     print("Inactive Markets:", inactive)
 
-    # 3. Infos d’un marché précis
+    # 3. Retrieve info for a specific market (e.g., BTC)
     if "BTC" in active:
         btc_info = api.get_market_info("BTC")
         print("BTC Info:", btc_info)
 
-    # 4. Signaux historiques globaux
+    # 4. Retrieve all historical signals
     all_signals = api.get_all_signals()
     print("All Signals (preview):", all_signals[:5])
 
-    # 5. Signaux historiques pour un marché
+    # 5. Retrieve historical signals for a specific market (e.g., BTC)
     btc_signals = api.get_market_signals("BTC")
     print("BTC Signals (preview):", btc_signals[:5])
 
-    # 6. Données historiques (24h) d’un marché
+    # 6. Retrieve the last 24h of data (1,440 data points) for a market
     btc_data = api.get_market_data("BTC")
     print("BTC Data (preview):", btc_data[:5])
 
 if __name__ == "__main__":
     main()
 
-## Contribuer
+Contributing
 
-    Forkez le dépôt.
-    Créez une branche pour vos modifications : git checkout -b feature/ma-feature.
-    Commitez vos modifications : git commit -m "Ajout de X ou correction de Y".
-    Poussez la branche : git push origin feature/ma-feature.
-    Ouvrez une Pull Request sur GitHub.
+    Fork the repository.
+    Create a branch for your feature or fix:
 
-Licence
+git checkout -b feature/my-feature
 
-Ce projet est sous licence MIT. Consultez le fichier LICENSE pour plus de détails.
+Commit your changes:
 
-Merci d’utiliser ArcheanVision API !
-Pour toute question ou assistance, contactez-nous à support@archeanvision.com.
+git commit -m "Add feature X or fix Y"
 
-Dernière mise à jour :jan 2025
+Push the branch:
+
+    git push origin feature/my-feature
+
+    Open a Pull Request on GitHub.
+
+License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+Thanks for using ArcheanVision API!
+If you have any questions or need assistance, please contact us at support@archeanvision.com.
+
+Last update: January 2025

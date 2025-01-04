@@ -130,3 +130,9 @@ if __name__ == "__main__":
 	if "BTC" in active_markets:
 		market_info = api.get_market_info("BTC")
 		print("Market Info for BTC:", market_info)
+
+#python setup.py sdist bdist_whee
+#pip install twine
+#twine upload dist/*
+
+
