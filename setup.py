@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="archeanvision-api",
-	version="1.0.2",  # Incrémentez la version en fonction de vos mises à jour
+	version="1.0.3",  # Incrémentez la version en fonction de vos mises à jour
 	description="Python wrapper for the updated Archean Vision API (using Bearer Token)",
 	long_description=open("README.md").read(),
 	long_description_content_type="text/markdown",
