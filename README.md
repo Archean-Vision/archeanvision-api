@@ -1,6 +1,6 @@
 # ArcheanVision API
 
-A **Python wrapper** for the [Archean Vision](https://archeanvision.com/) API.  
+A **Python wrapper** for the [ArcheanVision](https://archeanvision.com/) API.  
 This project allows you to retrieve information on active/inactive markets, real-time or historical signals, and much more — all secured via a **Bearer Token**.
 
 ---
